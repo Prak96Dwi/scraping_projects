@@ -12,7 +12,7 @@ on:
       - master 
 
   # any code pushed to a master and develop branch will also be a trigger
-  push: 
+  push:
     branches:
       - develop
       - master
