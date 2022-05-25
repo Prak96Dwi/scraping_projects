@@ -25,3 +25,19 @@ git clone https://github.com/Prak96Dwi/Django-Projects.git
 ```
 pip3 install -r requirements.txt                                                                            
 ```
+
+3. To push the code on github master branch
+
+```
+git push --set-upstream https://github.com/Prak96Dwi/scraping_projects.git master
+```
+
+# Usage
+
+This is the Home Page of my project
+
+![Home Page](/media/home_page.png)
+
+This is the information page where we get information of a person
+
+![Information Page](/media/info_page.png)
