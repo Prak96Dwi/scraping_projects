@@ -2,3 +2,8 @@
 # Virtual environment package
 # .Scrp_proj/.env\
 .env
+
+# pycache files
+# __pycache__
+# */__pycache__/settings.cpython-38.pyc
+__pycache__/

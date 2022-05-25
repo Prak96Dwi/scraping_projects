@@ -78,16 +78,28 @@ WSGI_APPLICATION = 'Scrap_proj.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-DATABASES = {
-   'default': {
-       'ENGINE' : 'django.db.backends.postgresql',
-       'NAME' : config('NAME'),
-       'USER' : config('USER'),
-       'PASSWORD' : config('PASSWORD'),
-       'HOST' : config('HOST'),
-       'PORT' : config('PORT'),
-   }
-}
+if os.getenv('GITHUB_WORKFLOW'):
+    DATABASES = {
+       'default': {
+           'ENGINE' : 'django.db.backends.postgresql',
+           'NAME' : 'erp_db',
+           'USER' : 'prakhar',
+           'PASSWORD' : 'Myadmin123',
+           'HOST' : 'localhost',
+           'PORT' : '5432',
+       }
+    }
+else:
+    DATABASES = {
+       'default': {
+           'ENGINE' : 'django.db.backends.postgresql',
+           'NAME' : config('NAME'),
+           'USER' : config('USER'),
+           'PASSWORD' : config('PASSWORD'),
+           'HOST' : config('HOST'),
+           'PORT' : config('PORT'),
+       }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
