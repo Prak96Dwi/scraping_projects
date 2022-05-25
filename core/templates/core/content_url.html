@@ -1,0 +1,49 @@
+{% extends 'core/base.html' %}
+
+
+
+{% block body-content %}
+<div>
+	<center>
+		<h3>{{ title }}</h3>
+		<p>
+			<img src="{{ image }}" height="200px" width="200px">
+		</p>
+		<p style="margin-left: 20%; margin-right: 20px;">
+			{{ data }}
+		</p>
+	</center>
+	<div style="background-color: #f8f9fa; margin-right: 50%; margin-left: 20%;">
+		<center><h5>Contents</h5></center>
+		{% for ele in content %}
+			<a href="" class = "contentbtn" data-name = "{{ name }}" id="" 
+			style="margin-left: 50px;">
+				{{ ele }} 
+			</a><br>
+		{% endfor %}
+	</div>
+</div>
+{% endblock body-content %}
+
+{% block search-js %}
+<script type="text/javascript">
+	$(".contentbtn").click(function(){
+
+		var name = $(this).data('name');
+
+		$.ajax({
+				type:  "GET",
+				url : "{% url "api-content-view" %}",
+				data : {
+					'name': name,
+				},
+				dataType: 'json',
+				success: function(data){
+
+					alert(data[0])
+					
+			    } // success block closes
+		})  // ajax closes
+	})// click function closes
+</script>
+{% endblock search-js %}

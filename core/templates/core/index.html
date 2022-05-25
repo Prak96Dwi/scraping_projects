@@ -1,0 +1,32 @@
+{% extends 'core/base.html' %}
+
+
+{% block body-content %}
+<div>
+	<center>
+		<form method="POST" style="margin-left:20%; margin-right:20%; margin-top: 20px;
+		 background-color: white; " novalidate>
+			{% csrf_token %}
+			{{ errors }}
+			<br><br>
+			<h3>Enter person name which you want to search</h3><br><br>
+			<div class="row form-group">
+				<div class = "col-md-4 col-bg-4 col-sm-4 col-lg-4">
+				    <label for="exampleInputUsername">Enter Title</label>
+				</div>
+				<div class = "col-md-8 col-bg-8  col-sm-8 col-lg-8">
+					 <input type="text" name="data" class="form-control" placeholder="Enter Title">
+				</div>
+			</div><br>
+			
+			<input type="submit" name="" value="Search" class = "searchbtn">
+		</form>
+	</center>
+</div>
+{% endblock body-content %}
+
+{% block search-js %}
+<script type="text/javascript">
+	
+</script>
+{% endblock search-js %}

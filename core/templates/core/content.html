@@ -1,0 +1,73 @@
+{% extends 'core/base.html' %}
+
+
+
+{% block body-content %}
+<div>
+	<center>
+		<h3>{{ title }}</h3>
+		<p>
+			<img src="{{ image }}" height="200px" width="200px">
+		</p>
+		<p style="margin-left: 20%; margin-right: 20px;">
+			{{ data }}
+		</p>
+	</center><br><br>
+
+	<div class="row form-group">
+		<div class = "col-md-4 col-bg-4 col-sm-4 col-lg-4">
+		    <div style="background-color: #f8f9fa; margin-right: 10%; margin-left: 20%;">
+			<center><h5>Contents</h5></center>
+			{% for ele in content %}
+				<a href="#{{ ele.detail2 }}" class = "contentbtn" data-name = "{{ name }}" 
+				id=""  data-det = "{{ ele.detail }}" data-det2 = "{{ ele.detail2 }}"
+				style="margin-left: 50px;">
+				<span>{{ ele.num }}</span>
+				<span>{{ ele.detail }}</span>
+				</a><br>
+			{% endfor %}
+			</div>
+		</div>
+		<div class = "col-md-8 col-bg-8  col-sm-8 col-lg-8">
+			 <h2 id="{{  ele.detail2 }}">{{ ele.detail }}</h2>
+			 <center>
+				<div class="htmlid" style="margin-right: 30px;">
+				</div>
+			 </center>
+		</div>
+	</div>
+</div>
+{% endblock body-content %}
+
+{% block search-js %}
+<script type="text/javascript">
+	// This ajax method is called when the user click on the url
+	// link of index content list
+	$(".contentbtn").click(function() {
+		// Retrieving name, detail and detail2
+		const name = $(this).data('name');
+		const detail = $(this).data('det');
+		const detail2 = $(this).data('det2');
+
+		// Ajax get request method
+		$.ajax({
+				type:  "GET",
+				url : "{% url "api-content-view" %}",
+				data : {
+					'name': name,
+					'detail': detail,
+					'detail2': detail2
+				},
+				dataType: 'json',
+				success: function(data){
+					var i;
+					var html = "<h2 id="+ data[0] +">" + data[1] + "</h2>";
+					for(i = 2; i <= data.length; i++){
+						html +=  "<p>"+ data[i] +"<p>"
+					}
+					$(".htmlid").html(html)
+			    } // success block closes
+		})  // ajax closes
+	})// click function closes
+</script>
+{% endblock search-js %}
