@@ -1,4 +1,4 @@
 
 # Virtual environment package
-.Scrp_proj/.env/
-# .tox
+.Scrp_proj/.env\
+.env\
