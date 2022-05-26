@@ -32,12 +32,18 @@ pip3 install -r requirements.txt
 git push --set-upstream https://github.com/Prak96Dwi/scraping_projects.git master
 ```
 
+4. If you want to pull the project from github
+
+```
+git pull --rebase
+```
+
 # Usage
 
 This is the Home Page of my project
 
-![Home Page](/media/home_page.png)
+![Home Page](/media/screenshots/home_page.png)
 
 This is the information page where we get information of a person
 
-![Information Page](/media/info_page.png)
+![Information Page](/media/screenshots/info_page.png)

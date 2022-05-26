@@ -4,6 +4,4 @@
 .env
 
 # pycache files
-# __pycache__
-# */__pycache__/settings.cpython-38.pyc
-__pycache__/
+__pycache__\
