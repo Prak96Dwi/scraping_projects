@@ -1,5 +1,7 @@
 
 # Virtual environment package
+venv/
+
 # .Scrp_proj/.env\
 .env
 
