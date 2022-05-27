@@ -8,6 +8,7 @@ from rest_framework import status
 from rest_framework.response import Response
 
 from django.shortcuts import render, redirect
+from django.conf import settings
 from core.serializer import ContentTextSerializer
 
 
@@ -19,12 +20,12 @@ def index(request):
     After submit form new page having information of a person
     whose name you have input in this form.
 
-    """ 
+    """
     if request.method == 'POST':
         data = request.POST.get('data')
 
         if data:
-            pages = requests.get(f"https://www.wikipedia.org/wiki/{data}")
+            pages = requests.get(f"{settings.WIKI_URL}{data}")
             if pages.status_code == status.HTTP_200_OK:
                 return redirect('data-detail', name=data)
             key = "This data is not available in Wikipedia"
@@ -46,7 +47,7 @@ def search_data(request, name=None):
     """
     if name:
         # This will returns particular wikepedia url page data
-        page = requests.get(f"https://www.wikipedia.org/wiki/{name}")
+        page = requests.get(f"{settings.WIKI_URL}{name}")
     # Creating BeautifulSoup object by passing page.content and getting in
     # html parser
     soup = BeautifulSoup(page.content, 'html.parser')
@@ -107,6 +108,11 @@ class ContentLinkTextAPIView(APIView):
         This method is called when user click on anchor tag of
         index content list.
 
+        Returns
+        -----------
+        content_list : json format
+            Content of the topic which the user wants to know
+
         """
         # Retreives data for request.GET
         data = request.GET
@@ -117,7 +123,7 @@ class ContentLinkTextAPIView(APIView):
             detail = data.get('detail')
             detail2 = data.get('detail2')
 
-        page = requests.get(f"https://www.wikipedia.org/wiki/{name}")
+        page = requests.get(f"{settings.WIKI_URL}{name}")
         soup = BeautifulSoup(page.content, 'html.parser')
         title = soup.find(id=detail2)
         content_list = [detail2, detail]
@@ -129,5 +135,4 @@ class ContentLinkTextAPIView(APIView):
 
         for _ in range(content_list.count('\n')):
             content_list.remove('\n')
-
-        return Response(content_list, status = status.HTTP_200_OK)
+        return Response(content_list, status=status.HTTP_200_OK)
